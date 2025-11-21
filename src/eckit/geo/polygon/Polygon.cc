@@ -87,6 +87,7 @@ Polygon::Edge Polygon::edge(int i) const {
 
 
 void Polygon::emplace_back_point(PointLonLat P) {
+    std::cerr << "in Polygon::emplace_back_point_at_intersection, P = " << P << std::endl;
     if (empty() || (!points_equal(P, back()) && !points_equal(P, front()))) {
         emplace_back(P);
     }
@@ -99,6 +100,7 @@ void Polygon::emplace_back_point_at_intersection(const Edge& E, const Edge& F) {
 
     if (const auto D = cross(A, B); !is_zero(D)) {
         const auto C = E.first - F.first;
+    std::cerr << "in Polygon::emplace_back_point_at_intersection, E.first + A * cross(B, C) * (1. / D) = " << E.first + A * cross(B, C) * (1. / D) << std::endl;
         emplace_back_point(E.first + A * cross(B, C) * (1. / D));
     }
 }
